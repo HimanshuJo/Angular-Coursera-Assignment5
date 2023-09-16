@@ -69,6 +69,85 @@
           }]
         }
       })
+      .state('public.signup', {
+        url: '/signup',
+        template: '<h1>Checking here!!</h1>\
+                <div class="container" ng-controller="RegistrationController as reg">\
+                  <fieldset>\
+                    <legend>Registration</legend>\
+                    <form name="regForm" novalidate>\
+                      <input style="background-color:black; \
+                                    border: solid 1px #6E6E6E;\
+                                    height: 30px; \
+                                    font-size:18px; \
+                      type="text" name="username" placeholder="First Name" ng-model="reg.currUser.username" required\
+                        minlength="4" ng-maxlength="10">\
+                      {{ reg.currUser.username }}\
+                      <span\
+                        ng-if="(regForm.username.$error.minlength || regForm.username.$error.required) && regForm.username.$touched">\
+                        First Name must be at least 4 characters long\
+                      </span>\
+                      <span ng-if="regForm.username.$error.maxlength && regForm.username.$touched">\
+                        First Name must not be longer than 10 characters\
+                      </span>\
+                      <br>\
+                      <input style="background-color:black; \
+                                    border: solid 1px #6E6E6E;\
+                                    height: 30px; \
+                                    font-size:18px; \
+                      type="text" name="lastname" placeholder="Last Name" ng-model="reg.currUser.lastname" required\
+                        minlength="4" ng-maxlength="10">\
+                      {{ reg.currUser.lastname }}\
+                      <span\
+                        ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.lastname.$touched">\
+                        Last Name must be at least 4 characters long\
+                      </span>\
+                      <span ng-if="regForm.lastname.$error.maxlength && regForm.lastname.$touched">\
+                        Last Name must not be longer than 10 characters\
+                      </span>\
+                      <br>\
+                      <input  style="background-color:black; \
+                              border: solid 1px #6E6E6E;\
+                              height: 30px; \
+                              font-size:18px; \
+                      type="email" name="email" placeholder="Email" ng-model="reg.currUser.email" required>\
+                      <span ng-if="regForm.email.$invalid && regForm.email.$touched">\
+                        Must be a valid email address: handle@domain format\
+                      </span>\
+                      <br>\
+                      <input  style="background-color:black; \
+                              border: solid 1px #6E6E6E;\
+                              height: 30px; \
+                              font-size:18px; \
+                              type="text" name="phone" placeholder="Please enter 10 digits" ng-model="reg.currUser.phone"\
+                              ng-pattern="/^[0-9]{10,10}$/">\
+                    <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">\
+                      Phone must be 10 digits long\
+                    </span>\
+                    <br>\
+                    <input  style="background-color:black; \
+                            border: solid 1px #6E6E6E;\
+                            height: 30px; \
+                            font-size:18px; \
+                            type="text" name="menunumber" placeholder="Menu Number" ng-model="reg.currUser.menunumber" required\
+                              minlength="4" ng-maxlength="10">\
+                            {{ reg.currUser.menunumber }}\
+                            <span\
+                              ng-if="(regForm.menunumber.$error.minlength || regForm.menunumber.$error.required) && regForm.menunumber.$touched">\
+                              Menu Number must be at least 4 characters long\
+                            </span>\
+                            <span ng-if="regForm.menunumber.$error.maxlength && regForm.menunumber.$touched">\
+                              Menu Number must not be longer than 10 characters\
+                            </span>\
+                            <br>\
+                      <button ng-disabled="regForm.$invalid" ng-click="reg.submit()">Submit</button>\
+                      <div style="margin-top: 10px;">\
+                        Form valid? {{ regForm.$valid }}\
+                      </div>\
+                    </form>\
+                  </fieldset>\
+                </div>',
+      })
       .state('public.menuitems', {
         url: '/menu/{category}',
         //templateUrl: 'src/public/menu-items/menu-items.html',

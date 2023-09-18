@@ -82,8 +82,9 @@
                                     font-size:18px; \
                                     margin-bottom: 5px;\
                       type="text" name="username" placeholder="First Name" ng-model="reg.currUser.username" required\
-                        minlength="4" ng-maxlength="10">\
+                        minlength="1" ng-maxlength="20">\
                       {{ reg.currUser.username }}\
+                      {{reg.setUserName(reg.currUser.username)}}\
                       <span\
                         ng-if="(regForm.username.$error.minlength || regForm.username.$error.required) && regForm.username.$touched">\
                         First Name must be at least 4 characters long\
@@ -98,8 +99,9 @@
                                     font-size:18px; \
                                     margin-bottom: 5px;\
                       type="text" name="lastname" placeholder="Last Name" ng-model="reg.currUser.lastname" required\
-                        minlength="4" ng-maxlength="10">\
+                        minlength="1" ng-maxlength="20">\
                       {{ reg.currUser.lastname }}\
+                      {{reg.setLastName(reg.currUser.lastname)}}\
                       <span\
                         ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.lastname.$touched">\
                         Last Name must be at least 4 characters long\
@@ -114,6 +116,8 @@
                               font-size:18px; \
                               margin-bottom: 5px;\
                       type="email" name="email" placeholder="Email" ng-model="reg.currUser.email" required>\
+                      {{ reg.currUser.email }}\
+                      {{reg.setEmail(reg.currUser.email)}}\
                       <span ng-if="regForm.email.$invalid && regForm.email.$touched">\
                         Must be a valid email address: handle@domain format\
                       </span>\
@@ -125,9 +129,11 @@
                               margin-bottom: 5px;\
                               type="text" name="phone" placeholder="Please enter 10 digits" ng-model="reg.currUser.phone"\
                               ng-pattern="/^[0-9]{10,10}$/">\
+                    {{ reg.currUser.phone }}\
                     <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">\
                       Phone must be 10 digits long\
                     </span>\
+                    {{reg.setPhone(reg.currUser.phone)}}\
                     <br>\
                     <input  style="background-color:black; \
                             border: solid 1px #6E6E6E;\
@@ -138,37 +144,76 @@
                             {{ reg.currUser.menunumber }}\
                       <span\
                         ng-if="reg.checkShortName(reg.currUser.menunumber)===false">\
-                          No such menu number exists\
-                          {{ regForm.$valid }}\
-                          {{regForm.$valid=false}}\
-                          {{ regForm.$valid }}\
+                          (No such menu number exists)\
+                          <!-- {{ regForm.$invalid }} -->\
+                          <span hidden>{{regForm.$invalid=true}}</span>\
+                          <!-- {{ regForm.$invalid }} -->\
                       </span>\
                       <span\
                       ng-if="reg.checkShortName(reg.currUser.menunumber)===true">\
-                        No such menu number exists\
-                        {{ regForm.$valid }}\
-                        {{regForm.$valid=true}}\
-                        {{ regForm.$valid }}\
+                        (menu exists)\
+                        <!-- {{ regForm.$valid }} -->\
+                        <span hidden>{{regForm.$valid=true}}</span>\
+                        <!-- {{ regForm.$valid }} --> \
                       </span>\
+                      <!-- outer val: {{ regForm.$invalid }} -->\
                       <br>\
-                      <button ng-disabled="regForm.$invalid" ng-click="reg.submit()">Submit</button>\
+                      <button ng-disabled="regForm.$invalid===true?true:false" ng-click="reg.submit()">Submit</button>\
                       <div style="margin-top: 10px;">\
-                        Form valid? {{ regForm.$valid }}\
-                        <br>\
+                        <!-- Form valid? {{ regForm.$valid }} -->\
+                        <!-- <br> -->\
                         <span\
                               ng-if="regForm.$valid && reg.completed===true">\
                               Your information has been saved\
-                            </span>\
+                              <!-- <br>\
+                              {{reg.favMenu.description}}\
+                              <br>\
+                              {{reg.favMenu.large_portion_name}}\
+                              <br>\
+                              {{reg.favMenu.name}}\
+                              <br>\
+                              {{reg.favMenu.price_large}}\
+                              <br>\
+                              {{reg.favMenu.price_small}}\
+                              <br>\
+                              {{reg.favMenu.short_name}}\
+                              <br>\
+                              {{reg.favMenu.small_portion_name}}\
+                        </span> -->\
                       </div>\
                     </form>\
                   </fieldset>\
                 </div>',
         controller: 'RegistrationController',
-        resolve: {
-          menuItems: ['$stateParams', 'MenuService', function ($stateParams, MenuService) {
-            return MenuService.validateShortName();
-          }]
-        }
+      })
+      .state('public.myinfo', {
+        url: '/myinfo',
+        template:'<div ng-controller="RegistrationController as reg">\
+        <span ng-if="reg.getValue()[0]===\'undefined\'"><a ui-sref="public.signup"><h1 style="color:white;">Not Signed Up Yet. Sign up Now!</h1></a></span>\
+        <span ng-if="reg.getValue()[0]!==\'undefined\'">\
+        <h1>Your data</h1>\
+        {{reg.getValue()[0]}}\
+        <br>\
+        {{reg.getValue()[1]}}\
+        <br>\
+        {{reg.getValue()[2]}}\
+        <br>\
+        {{reg.getValue()[3]}}\
+        <br>\
+        {{reg.getValue()[4]}}\
+        <br>\
+        {{reg.getValue()[5]}}\
+        <br>\
+        {{reg.getValue()[6]}}\
+        <br>\
+        {{reg.getValue()[7]}}\
+        <br>\
+        {{reg.getValue()[8]}}\
+        <br>\
+        {{reg.getValue()[9]}}\
+        </span>\
+        </div>',
+        controller: 'RegistrationController',
       })
       .state('public.menuitems', {
         url: '/menu/{category}',

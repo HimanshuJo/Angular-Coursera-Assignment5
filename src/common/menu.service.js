@@ -14,7 +14,9 @@
     let itemstmpmp = new Map();
     let itemsmp = new Map();
     let itemsarr = [];
-    let shortNameMp=[];
+    let shortNameMp = [];
+    let favArrMp = new Map();
+    let fnshortName="";
 
     service.getCategories = function () {
       return $http.get(ApiPath + '/categories.json').then(function (response) {
@@ -28,6 +30,12 @@
         return response.data;
       });
     };
+
+    service.getFavouriteMenu = function (shortname) {
+      console.log("reached in getFavouriteMenu: ");
+      fnshortName=shortname;
+      return favArrMp.get(shortname);
+    }
 
     service.validateShortName = function () {
       console.log("reached in validation: ");
@@ -128,13 +136,22 @@
               small_portion_name: small_portion_name_value
             })
             shortNameMp.push(short_name_value);
+            favArrMp.set(short_name_value, {
+              description: description_value,
+              large_portion_name: large_portion_name_value,
+              name: name_value,
+              price_large: price_large_value,
+              price_small: price_small_value,
+              short_name: short_name_value,
+              small_portion_name: small_portion_name_value
+            })
           }
         }
       }, function errorCallback(response) {
       });
 
       $timeout(function () {
-        
+
       }, 5000);
       return shortNameMp;
 

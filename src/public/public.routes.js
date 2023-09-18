@@ -86,11 +86,11 @@
                       {{ reg.currUser.username }}\
                       {{reg.setUserName(reg.currUser.username)}}\
                       <span\
-                        ng-if="(regForm.username.$error.minlength || regForm.username.$error.required) && regForm.username.$touched">\
-                        First Name must be at least 4 characters long\
+                        ng-if="(regForm.username.$error.minlength || regForm.username.$error.required) && regForm.username.$touched" style="color: red">\
+                        First Name must be at least 1 character long\
                       </span>\
-                      <span ng-if="regForm.username.$error.maxlength && regForm.username.$touched">\
-                        First Name must not be longer than 10 characters\
+                      <span ng-if="regForm.username.$error.maxlength && regForm.username.$touched" style="color: red">\
+                        First Name must not be longer than 20 characters\
                       </span>\
                       <br>\
                       <input style="background-color:black; \
@@ -103,11 +103,11 @@
                       {{ reg.currUser.lastname }}\
                       {{reg.setLastName(reg.currUser.lastname)}}\
                       <span\
-                        ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.lastname.$touched">\
-                        Last Name must be at least 4 characters long\
+                        ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.lastname.$touched" style="color: red">\
+                        Last Name must be at least 1 character long\
                       </span>\
-                      <span ng-if="regForm.lastname.$error.maxlength && regForm.lastname.$touched">\
-                        Last Name must not be longer than 10 characters\
+                      <span ng-if="regForm.lastname.$error.maxlength && regForm.lastname.$touched" style="color: red">\
+                        Last Name must not be longer than 20 characters\
                       </span>\
                       <br>\
                       <input  style="background-color:black; \
@@ -118,7 +118,7 @@
                       type="email" name="email" placeholder="Email" ng-model="reg.currUser.email" required>\
                       {{ reg.currUser.email }}\
                       {{reg.setEmail(reg.currUser.email)}}\
-                      <span ng-if="regForm.email.$invalid && regForm.email.$touched">\
+                      <span ng-if="regForm.email.$invalid && regForm.email.$touched" style="color: red">\
                         Must be a valid email address: handle@domain format\
                       </span>\
                       <br>\
@@ -130,7 +130,7 @@
                               type="text" name="phone" placeholder="Please enter 10 digits" ng-model="reg.currUser.phone"\
                               ng-pattern="/^[0-9]{10,10}$/">\
                     {{ reg.currUser.phone }}\
-                    <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">\
+                    <span ng-if="regForm.phone.$invalid && regForm.phone.$touched" style="color: red">\
                       Phone must be 10 digits long\
                     </span>\
                     {{reg.setPhone(reg.currUser.phone)}}\
@@ -143,14 +143,14 @@
                             type="text" name="menunumber" placeholder="Menu Number" ng-model="reg.currUser.menunumber" required>\
                             {{ reg.currUser.menunumber }}\
                       <span\
-                        ng-if="reg.checkShortName(reg.currUser.menunumber)===false">\
+                        ng-if="reg.checkShortName(reg.currUser.menunumber)===false" style="color: red">\
                           (No such menu number exists)\
                           <!-- {{ regForm.$invalid }} -->\
                           <span hidden>{{regForm.$invalid=true}}</span>\
                           <!-- {{ regForm.$invalid }} -->\
                       </span>\
                       <span\
-                      ng-if="reg.checkShortName(reg.currUser.menunumber)===true">\
+                      ng-if="reg.checkShortName(reg.currUser.menunumber)===true" style="color: green">\
                         (menu exists)\
                         <!-- {{ regForm.$valid }} -->\
                         <span hidden>{{regForm.$valid=true}}</span>\

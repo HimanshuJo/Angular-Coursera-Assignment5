@@ -189,30 +189,27 @@
       .state('public.myinfo', {
         url: '/myinfo',
         template:'<div ng-controller="RegistrationController as reg">\
-        <span ng-if="reg.getValue()[0]===\'undefined\'"><a ui-sref="public.signup"><h1 style="color:white;">Not Signed Up Yet. Sign up Now!</h1></a></span>\
-        <span ng-if="reg.getValue()[0]!==\'undefined\'">\
-        <h1>Your data</h1>\
-        {{reg.getValue()[0]}}\
-        <br>\
-        {{reg.getValue()[1]}}\
-        <br>\
-        {{reg.getValue()[2]}}\
-        <br>\
-        {{reg.getValue()[3]}}\
-        <br>\
-        {{reg.getValue()[4]}}\
-        <br>\
-        {{reg.getValue()[5]}}\
-        <br>\
-        {{reg.getValue()[6]}}\
-        <br>\
-        {{reg.getValue()[7]}}\
-        <br>\
-        {{reg.getValue()[8]}}\
-        <br>\
-        {{reg.getValue()[9]}}\
+        <span ng-if="reg.getValue()[0]===\'undefined\' || reg.getValue()[0]===null">\
+          <a ui-sref="public.signup">\
+            <h1 style="color:white;">Not Signed Up Yet. Sign up Now!</h1>\
+          </a>\
         </span>\
-        </div>',
+        <span ng-if="reg.getValue()[0]!==\'undefined\' && reg.getValue()[0]!==null">\
+          <h1>Your data: </h1>\
+          <p>\
+            <span class="label">Name:</span> {{reg.getValue()[0]}}<br>\
+            <span class="label">Lastname:</span> {{reg.getValue()[1]}}<br>\
+            <span class="label">Email:</span> {{reg.getValue()[2]}}<br>\
+            <span class="label">Phone:</span> {{reg.getValue()[3]}}<br>\
+            <span class="label">Favorite menu description:</span> {{reg.getValue()[4]}}<br>\
+            <span class="label">Favorite menu large portion name:</span> {{reg.getValue()[5]}}<br>\
+            <span class="label">Favorite menu name:</span> {{reg.getValue()[6]}}<br>\
+            <span class="label">Favorite menu price large:</span> {{reg.getValue()[7]}}<br>\
+            <span class="label">Favorite menu short name:</span> {{reg.getValue()[8]}}<br>\
+            <span class="label">Favorite menu small portion name:</span> {{reg.getValue()[9]}}<br>\
+          </p>\
+        </span>\
+      </div>',
         controller: 'RegistrationController',
       })
       .state('public.menuitems', {

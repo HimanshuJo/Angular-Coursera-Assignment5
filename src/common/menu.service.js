@@ -16,7 +16,6 @@
     let itemsarr = [];
     let shortNameMp = [];
     let favArrMp = new Map();
-    let fnshortName="";
 
     service.getCategories = function () {
       return $http.get(ApiPath + '/categories.json').then(function (response) {
@@ -25,20 +24,16 @@
     };
 
     service.getMenuItems = function (category) {
-      console.log("reached here");
       return $http.get(ApiPath + '/menu_items/' + category + '.json').then(function (response) {
         return response.data;
       });
     };
 
     service.getFavouriteMenu = function (shortname) {
-      console.log("reached in getFavouriteMenu: ");
-      fnshortName=shortname;
       return favArrMp.get(shortname);
     }
 
     service.validateShortName = function () {
-      console.log("reached in validation: ");
       if (itemsarr.length != 0) {
         itemsarr.splice(0, itemsarr.length);
       }
@@ -48,7 +43,6 @@
           url: (ApiBasePath + "")
         }).then(function successCallback(response) {
           const entries = Object.entries(response.data);
-          console.log("categories data: ", response);
           for (let [key, value] of entries) {
             const entries2 = Object.entries(value);
             let id_value = "", name_value = "", short_name_value = "", special_instructions_value = "";
@@ -80,7 +74,6 @@
         url: (ApiBasePath2 + "")
       }).then(function successCallback(response) {
         const entries = Object.entries(response.data);
-        console.log("items data: ", response);
         for (let [key, value] of entries) {
           const entries2 = Object.entries(value);
           let curtochk = "";
@@ -152,7 +145,7 @@
 
       $timeout(function () {
 
-      }, 5000);
+      }, 100);
       return shortNameMp;
 
     }

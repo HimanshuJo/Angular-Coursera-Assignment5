@@ -71,10 +71,10 @@
       })
       .state('public.signup', {
         url: '/signup',
-        template: '<h1>Sign up for the newsletter</h1>\
+        template: '<h1 style="text-align: center;">Sign up for the newsletter</h1>\
                 <div class="container" ng-controller="RegistrationController as reg">\
                   <fieldset>\
-                    <legend>Sign up form</legend>\
+                    <legend style="color:black">Sign up form</legend>\
                     <form name="regForm" novalidate>\
                       <input style="background-color:black; \
                                     border: solid 1px #6E6E6E;\
@@ -87,10 +87,10 @@
                       {{reg.setUserName(reg.currUser.username)}}\
                       <span\
                         ng-if="(regForm.username.$error.minlength || regForm.username.$error.required) && regForm.username.$touched" style="color: red">\
-                        First Name must be at least 1 character long\
+                        Please make sure that \'First Name\' must be at least 1 character long\
                       </span>\
                       <span ng-if="regForm.username.$error.maxlength && regForm.username.$touched" style="color: red">\
-                        First Name must not be longer than 20 characters\
+                        Please make sure that \'First Name\' must not be longer than 20 characters\
                       </span>\
                       <br>\
                       <input style="background-color:black; \
@@ -104,10 +104,10 @@
                       {{reg.setLastName(reg.currUser.lastname)}}\
                       <span\
                         ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.lastname.$touched" style="color: red">\
-                        Last Name must be at least 1 character long\
+                        Please make sure that \'Last Name\' must be at least 1 character long\
                       </span>\
                       <span ng-if="regForm.lastname.$error.maxlength && regForm.lastname.$touched" style="color: red">\
-                        Last Name must not be longer than 20 characters\
+                        Please make sure that \'Last Name\' must not be longer than 20 characters\
                       </span>\
                       <br>\
                       <input  style="background-color:black; \
@@ -119,7 +119,7 @@
                       {{ reg.currUser.email }}\
                       {{reg.setEmail(reg.currUser.email)}}\
                       <span ng-if="regForm.email.$invalid && regForm.email.$touched" style="color: red">\
-                        Must be a valid email address: handle@domain format\
+                        Please make sue that \'Email\' is a valid email address e.g: handle@domain format\
                       </span>\
                       <br>\
                       <input  style="background-color:black; \
@@ -131,7 +131,7 @@
                               ng-pattern="/^[0-9]{10,10}$/">\
                     {{ reg.currUser.phone }}\
                     <span ng-if="regForm.phone.$invalid && regForm.phone.$touched" style="color: red">\
-                      Phone must be 10 digits long\
+                      Please make sure that \'Phone\' must be 10 digits long and without any special characters\
                     </span>\
                     {{reg.setPhone(reg.currUser.phone)}}\
                     <br>\
@@ -144,7 +144,7 @@
                             {{ reg.currUser.menunumber }}\
                       <span\
                         ng-if="reg.checkShortName(reg.currUser.menunumber)===false" style="color: red">\
-                          (No such menu number exists)\
+                          <span ng-if="reg.isShortNameEmpty(reg.currUser.menunumber)===false">(No such menu number exists)</span>\
                           <!-- {{ regForm.$invalid }} -->\
                           <span hidden>{{regForm.$invalid=true}}</span>\
                           <!-- {{ regForm.$invalid }} -->\
@@ -183,31 +183,67 @@
                       </div>\
                     </form>\
                   </fieldset>\
-                </div>',
+                  <hr>\
+                </div>\
+                ',
         controller: 'RegistrationController',
       })
       .state('public.myinfo', {
         url: '/myinfo',
-        template:'<div ng-controller="RegistrationController as reg">\
+        template:'<div ng-controller="RegistrationController as reg" style="text-align: center;">\
         <span ng-if="reg.getValue()[0]===\'undefined\' || reg.getValue()[0]===null">\
           <a ui-sref="public.signup">\
             <h1 style="color:white;">Not Signed Up Yet. Sign up Now!</h1>\
           </a>\
         </span>\
         <span ng-if="reg.getValue()[0]!==\'undefined\' && reg.getValue()[0]!==null">\
-          <h1>Your data: </h1>\
-          <p>\
-            <span class="label">Name:</span> {{reg.getValue()[0]}}<br>\
-            <span class="label">Lastname:</span> {{reg.getValue()[1]}}<br>\
-            <span class="label">Email:</span> {{reg.getValue()[2]}}<br>\
-            <span class="label">Phone:</span> {{reg.getValue()[3]}}<br>\
-            <span class="label">Favorite menu description:</span> {{reg.getValue()[4]}}<br>\
-            <span class="label">Favorite menu large portion name:</span> {{reg.getValue()[5]}}<br>\
-            <span class="label">Favorite menu name:</span> {{reg.getValue()[6]}}<br>\
-            <span class="label">Favorite menu price large:</span> {{reg.getValue()[7]}}<br>\
-            <span class="label">Favorite menu short name:</span> {{reg.getValue()[8]}}<br>\
-            <span class="label">Favorite menu small portion name:</span> {{reg.getValue()[9]}}<br>\
-          </p>\
+          <h1>Your data:</h1>\
+          <table>\
+            <tr>\
+              <th>Field</th>\
+              <th>Data</th>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Name:</span></td>\
+              <td>{{reg.getValue()[0]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Lastname:</span></td>\
+              <td>{{reg.getValue()[1]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Email:</span></td>\
+              <td>{{reg.getValue()[2]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Phone:</span></td>\
+              <td>{{reg.getValue()[3]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Favorite menu description:</span></td>\
+              <td>{{reg.getValue()[4]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Favorite menu large portion name:</span></td>\
+              <td>{{reg.getValue()[5]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Favorite menu name:</span></td>\
+              <td>{{reg.getValue()[6]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Favorite menu price large:</span></td>\
+              <td>{{reg.getValue()[7]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Favorite menu short name:</span></td>\
+              <td>{{reg.getValue()[8]}}</td>\
+            </tr>\
+            <tr>\
+              <td><span class="label">Favorite menu small portion name:</span></td>\
+              <td>{{reg.getValue()[9]}}</td>\
+            </tr>\
+          </table>\
         </span>\
       </div>',
         controller: 'RegistrationController',

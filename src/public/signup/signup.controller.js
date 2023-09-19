@@ -26,6 +26,10 @@
       $window.localStorage.setItem('phone', curphone);
     }
 
+    reg.isShortNameEmpty=function(shortname){
+      return shortname===''||shortname===undefined||shortname===null;
+    }
+
     reg.checkShortName = function (shortname) {
       let curflag = false;
       for (let i = 0; i < reg.shortNameMp.length; ++i) {

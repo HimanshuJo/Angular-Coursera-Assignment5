@@ -4,12 +4,41 @@
   border: 2px solid #3F0C1F;
 }
 
+/* code starts here */
+
 .label {
   font-weight: bold;
   font-style: italic;
-  font-size: 20px;
-  color: black;
 }
+
+/* Style for the table */
+table {
+  margin: 0 auto;
+  /* Center the table */
+  text-align: left;
+  font-size: 18px;
+  border-collapse: collapse;
+  width:70%;
+}
+
+/* Style for table cells */
+td {
+  padding: 5px;
+  border: 1px solid #6E6E6E;
+  background-color: black;
+  color: white;
+  word-wrap: break-word;
+}
+
+/* Style for table headers */
+th {
+  background-color: #007bff;
+  color: white;
+  padding: 5px;
+  border: 1px solid #6E6E6E;
+}
+
+/* code ends here */
 
 #menu-tile,
 #specials-tile,
